@@ -12,15 +12,29 @@ import java.util.List;
  * @author jonat
  */
 public class Save {
-    private int id, dia, hora;
+    private int id, dia;
     private double dinheiro;
     private List<String> upgrades = new ArrayList<>();
 
-    public Save(int id, int dia, int hora, double dinheiro) {
+    public Save(int id, int dia, double dinheiro, ArrayList upgrades) {
         this.id = id;
         this.dia = dia;
-        this.hora = hora;
         this.dinheiro = dinheiro;
+        this.upgrades = upgrades;
+    }
+    
+    public Save(int dia, double dinheiro, ArrayList upgrades) {
+        this.dia = dia;
+        this.dinheiro = dinheiro;
+        this.upgrades = upgrades;
+    }
+    
+    public Save(int dia, double dinheiro){
+        this.dia = dia;
+        this.dinheiro = dinheiro;
+    }
+    
+    public Save() {
     }
 
     public int getId() {
@@ -37,14 +51,6 @@ public class Save {
 
     public void setDia(int dia) {
         this.dia = dia;
-    }
-
-    public int getHora() {
-        return hora;
-    }
-
-    public void setHora(int hora) {
-        this.hora = hora;
     }
 
     public double getDinheiro() {
@@ -65,7 +71,7 @@ public class Save {
 
     @Override
     public String toString() {
-        return "Save{" + "id=" + id + ", dia=" + dia + ", hora=" + hora + ", dinheiro=" + dinheiro + '}';
+        return "Save{" + "id=" + id + ", dia=" + dia + ", dinheiro=" + dinheiro + '}';
     }
     
     
