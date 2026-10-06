@@ -53,11 +53,12 @@ public class JogoController {
                 minuto = 0;
                 hora += 1;
             }else minuto += 10;
-            
-            r1 = String.valueOf(hora) + ":" + String.valueOf(minuto);
+            if(minuto == 0){
+                r1 = String.valueOf(hora) + ":00";
+            }else r1 = String.valueOf(hora) + ":" + String.valueOf(minuto);
             h.setText(r1);
             
-        }while(hora <= 13.50);
+        }while(hora == 14 && minuto <= 0);
         card.setStyle("-fx-opacity: 1.0");
         background.setStyle("-fx-opacity: 0.5");
     }
