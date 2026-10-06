@@ -58,7 +58,7 @@ public class JogoController {
             }else r1 = String.valueOf(hora) + ":" + String.valueOf(minuto);
             h.setText(r1);
             
-        }while(hora == 14 && minuto <= 0);
+        }while(hora == 14 && minuto == 0);
         card.setStyle("-fx-opacity: 1.0");
         background.setStyle("-fx-opacity: 0.5");
     }
