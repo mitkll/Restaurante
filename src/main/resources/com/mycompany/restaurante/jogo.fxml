@@ -9,11 +9,11 @@
     <children>
         <Label fx:id="h" text=""/>
         <Label fx:id="d" text=""/>
-        <Button fx:id="loja" text="Loja" onAction="#loja" />
     </children>
     <padding>
         <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
     </padding>
+    <!--
     <VBox fx:id="background" alignment="CENTER" spacing="20.0">
         <VBox fx:id="card" alignment="CENTER" spacing="20.0">
             <children>
@@ -29,7 +29,6 @@
                     <Label fx:id="dinheiro" text="Recebido: "/>
                     <Label fx:id="valorD" text=""/>
                 </HBox>
-                <Label fx:id="quebra" text="---------------------------------------"/>
                 <HBox>
                     <Label fx:id="total" text="Total: "/>
                     <Label fx:id="valorT" text=""/>
@@ -41,4 +40,5 @@
             </padding>
         </VBox>
     </VBox>
+    -->
 </VBox>
