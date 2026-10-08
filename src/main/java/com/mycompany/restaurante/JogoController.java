@@ -54,7 +54,7 @@ public class JogoController {
         Timeline timeline = new Timeline();
         
         timeline.getKeyFrames().add(
-            new KeyFrame(Duration.seconds(1), e -> {
+            new KeyFrame(Duration.seconds(5), e -> {
                 if (hora.getHour() < 14) {
                     hora = hora.plusMinutes(10);
                     relogioFX();
