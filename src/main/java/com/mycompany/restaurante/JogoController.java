@@ -20,25 +20,40 @@ import javafx.util.Duration;
  */
 public class JogoController {
     @FXML private Label h, d;
-    //@FXML private VBox card, background;
+    @FXML private Button loja;
+    @FXML private VBox card;//, background;
     
-    LocalTime hora = LocalTime.of(10,0);
-    private int dia = 1;
+    private static LocalTime horaS  = LocalTime.of(10,0);
+    private static int diaS = 1;
+    public static Save save = new Save(1, 3000, false);
+    
+    private LocalTime hora;
+    private int dia, i = 0;
+    private Timeline relogio;
     
     @FXML
     private void loja() throws IOException {
+        relogio.stop();
+        horaS = hora;
+        diaS = dia;
+        
         App.setRoot("loja");
     }
     
     @FXML
-    private void initialize() throws InterruptedException{
-        
-        /*card.setStyle("-fx-opacity: 0;"
-                + "-fx-transition: opacity 2s");
-        background.setStyle("-fx-opacity: 0;"
+    private void initialize() throws InterruptedException{        
+        card.setStyle("-fx-opacity: 0;"
+                + "-fx-transition: opacity 2s;"
+                + "-fx-backgrond-color: #ebebd1");
+        /*background.setStyle("-fx-opacity: 0;"
                 + "-fx-transition: opacity 1s;"
-                + "-fx-background-color: black");
-        hora = LocalTime.of(10,0);*/
+                + "-fx-background-color: black");*/
+        loja.setStyle("-fx-translate-x:200;"
+                + "-fx-translate-y:40;"
+                + "-fx-padding: 3 15;"
+                + "-fx-opacity: 1");
+        hora = horaS;
+        dia = diaS;
         relogioFX();
         relogio();
     }
@@ -51,30 +66,58 @@ public class JogoController {
     }
     
     private void relogio() throws InterruptedException{
-        Timeline timeline = new Timeline();
-        
-        timeline.getKeyFrames().add(
-            new KeyFrame(Duration.seconds(5), e -> {
-                if (hora.getHour() < 14) {
-                    hora = hora.plusMinutes(10);
-                    relogioFX();
-                }else{
-                    hora = LocalTime.of(9, 50);
-                    dia++;
+        relogio = new Timeline();
+        relogio.getKeyFrames().add(
+            new KeyFrame(Duration.seconds(10), e -> {
+                hora = hora.plusMinutes(10);
+                relogioFX();
+
+                if (!save.isNoite()) {
+                    if (!hora.isBefore(LocalTime.of(15, 0))) {
+                        fim();
+                    }
+                } else {
+                    if (hora.isAfter(LocalTime.of(10, 0)) && !hora.isBefore(LocalTime.of(15, 0)) 
+                        && hora.isBefore(LocalTime.of(22, 0))) {
+                        fim();
+                    } 
+                    else if (!hora.isBefore(LocalTime.of(3, 0)) && hora.isBefore(LocalTime.of(10, 0))) {
+                        fim();
+                    }
                 }
             })
         );
-        timeline.setCycleCount(Timeline.INDEFINITE);
-        timeline.play();
+        relogio.setCycleCount(Timeline.INDEFINITE);
+        relogio.play();
     }
     
-    /*private void fim(){
+    private void fim(){
         card.setStyle("-fx-opacity: 1.0");
-        background.setStyle("-fx-opacity: 0.5");
-    }*/
+        relogio.stop();
+        loja.setStyle("-fx-opacity: 0");
+        //background.setStyle("-fx-opacity: 0.5");
+    }
     
     @FXML
     private void continuar() throws InterruptedException{
-        initialize();
+        if (!save.isNoite()) {
+            hora = LocalTime.of(10, 0);
+            dia++;
+            horaS = hora;
+            diaS = dia;
+            initialize();
+        } else {
+            if (hora.getHour() >= 15 && hora.getHour() < 22) {
+                hora = LocalTime.of(22, 0);
+                horaS = hora;
+                initialize();
+            } else {
+                hora = LocalTime.of(10, 0);
+                dia++;
+                horaS = hora;
+                diaS = dia;
+                initialize();
+            }
+        }
     }
 }

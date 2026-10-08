@@ -14,7 +14,7 @@ import java.util.List;
 public class Save {
     private int id, dia;
     private double dinheiro;
-    private boolean noite = false;
+    private boolean noite;
     private List<String> upgrades = new ArrayList<>();
 
     public Save(int id, int dia, double dinheiro, boolean noite, ArrayList upgrades) {
@@ -37,9 +37,7 @@ public class Save {
         this.dinheiro = dinheiro;
         this.noite = noite;
     }
-    
-    public Save() {
-    }
+
 
     public int getId() {
         return id;

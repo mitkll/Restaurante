@@ -6,39 +6,34 @@
 <?import javafx.geometry.Insets?>
 
 <VBox alignment="TOP_CENTER" spacing="20.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.restaurante.JogoController">
-    <children>
-        <Label fx:id="h" text="a"/>
-        <Label fx:id="d" text="a"/>
-    </children>
+    <Label fx:id="h" text="a"/>
+    <Label fx:id="d" text="a"/>
     <padding>
         <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
     </padding>
-    <!--
-    <VBox fx:id="background" alignment="CENTER" spacing="20.0">
-        <VBox fx:id="card" alignment="CENTER" spacing="20.0">
-            <children>
-                <HBox>
-                    <Label fx:id="gasto" text="Gastos: "/>
-                    <Label fx:id="valorG" text=""/>
-                </HBox>
-                <HBox>
-                    <Label fx:id="conta" text="Contas: "/>
-                    <Label fx:id="valorC" text=""/>
-                </HBox>
-                <HBox>
-                    <Label fx:id="dinheiro" text="Recebido: "/>
-                    <Label fx:id="valorD" text=""/>
-                </HBox>
-                <HBox>
-                    <Label fx:id="total" text="Total: "/>
-                    <Label fx:id="valorT" text=""/>
-                </HBox>
-                <Button fx:id="proximo" text="Próximo dia" onAction="#continuar" />
-            </children>
-            <padding>
-                <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
-            </padding>
-        </VBox>
+    <VBox fx:id="card" alignment="CENTER" spacing="20.0">
+        <children>
+            <HBox>
+                <Label fx:id="gasto" text="Gastos: "/>
+                <Label fx:id="valorG" text="a"/>
+            </HBox>
+            <HBox>
+                <Label fx:id="conta" text="Contas: "/>
+                <Label fx:id="valorC" text="a"/>
+            </HBox>
+            <HBox>
+                <Label fx:id="dinheiro" text="Recebido: "/>
+                <Label fx:id="valorD" text="a"/>
+            </HBox>
+            <HBox>
+                <Label fx:id="total" text="Total: "/>
+                <Label fx:id="valorT" text="a"/>
+            </HBox>
+            <Button fx:id="coninuar" text="Próximo dia" onAction="#continuar" />
+        </children>
+        <padding>
+            <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+        </padding>
     </VBox>
-    -->
+    <Button fx:id="loja" text="Loja" onAction="#loja" />
 </VBox>

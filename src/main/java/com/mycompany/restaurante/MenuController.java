@@ -10,7 +10,7 @@ public class MenuController {
     private void save() throws IOException {
         if(Saves.save.isEmpty()){
             Alert aviso = new Alert(Alert.AlertType.INFORMATION);
-            aviso.setTitle("Sistema de reservas");
+            aviso.setTitle("");
             aviso.setHeaderText(null); // tira a faixa de cima
             aviso.setContentText("Não existe nenhum save");
             aviso.showAndWait();
