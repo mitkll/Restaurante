@@ -1,0 +1,11 @@
+@font-face{
+    font-family: 'vcr_osd';
+    src: url('VCR_OSD_MONO_1.001.ttf');
+}
+
+.button{
+    -fx-background-color: transparent;
+    -fx-font-family: 'VCR OSD Mono', sans-serif;
+    -fx-font-size: 16px;
+    -fx-text-fill: black;
+}

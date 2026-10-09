@@ -68,7 +68,7 @@ public class JogoController {
     private void relogio() throws InterruptedException{
         relogio = new Timeline();
         relogio.getKeyFrames().add(
-            new KeyFrame(Duration.seconds(10), e -> {
+            new KeyFrame(Duration.seconds(5), e -> {
                 hora = hora.plusMinutes(10);
                 relogioFX();
 

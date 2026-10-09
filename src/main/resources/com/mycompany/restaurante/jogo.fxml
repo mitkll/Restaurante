@@ -3,9 +3,13 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.image.*?>
+<?import java.net.URL?>
 <?import javafx.geometry.Insets?>
 
 <VBox alignment="TOP_CENTER" spacing="20.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.restaurante.JogoController">
+    <stylesheets>
+        <URL value="@style.css" />
+    </stylesheets>
     <Label fx:id="h" text="a"/>
     <Label fx:id="d" text="a"/>
     <padding>
@@ -35,5 +39,5 @@
             <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
         </padding>
     </VBox>
-    <Button fx:id="loja" text="Loja" onAction="#loja" />
+    <Button fx:id="loja" text="Loja" onAction="#loja" styleClass="button"/>
 </VBox>
