@@ -11,7 +11,7 @@
         <URL value="@style.css" />
     </stylesheets>
     <children>
-      <Label text='"Título"' />
+      <Label fx:id="titulo" text='"Título"' />
       <Button fx:id="nj" text="Novo Jogo" onAction="#novoJogo"/>
    </children>
    <padding>
