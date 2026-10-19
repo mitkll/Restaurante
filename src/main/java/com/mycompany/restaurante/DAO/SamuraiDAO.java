@@ -8,21 +8,21 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.ResultSet;
-import java.util.ArrayList;
+/*import java.util.ArrayList;
 import java.util.List;
 import com.mycompany.restaurante.DAO.utils.Conexao;
 import shogunato.Enum.Classe;
 import shogunato.Enum.Condicao;
 import shogunato.Enum.Elemento;
 import shogunato.Enum.Flecha;
-import shogunato.Model.Samurai;
+import shogunato.Model.Samurai;*/
 
 /**
  *
  * @author jonat
  */
 public class SamuraiDAO {
-    Conexao conexao = new Conexao();
+    /*Conexao conexao = new Conexao();
     public int add(Samurai s) throws SQLException{
         String sql = "INSERT INTO samurai (nome, nivel, xp, pe, pem, vida, vm, flechaqtde, dinheiro, andar, elixir, flecha, clas, cond, elem) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) RETURNING id";
         {
@@ -159,5 +159,5 @@ public class SamuraiDAO {
                 System.out.println("");
             }
         }
-    }
+    }*/
 }
