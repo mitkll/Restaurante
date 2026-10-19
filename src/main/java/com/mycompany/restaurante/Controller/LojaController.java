@@ -1,5 +1,8 @@
-package com.mycompany.restaurante;
+package com.mycompany.restaurante.Controller;
 
+import com.mycompany.restaurante.App;
+import com.mycompany.restaurante.Controller.JogoController;
+import com.mycompany.restaurante.Model.Save;
 import java.io.IOException;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
