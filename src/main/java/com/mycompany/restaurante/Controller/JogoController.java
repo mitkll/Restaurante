@@ -27,7 +27,7 @@ public class JogoController {
     
     private static LocalTime horaS  = LocalTime.of(10,0);
     private static int diaS = 1;
-    public static Save save = new Save(1, 3000, false);
+    public static Save save = new Save("", 1, 3000, false);
     
     private LocalTime hora;
     private int dia, i = 0;
