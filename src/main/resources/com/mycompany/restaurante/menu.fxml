@@ -6,15 +6,24 @@
 <?import java.net.URL?>
 <?import javafx.geometry.Insets?>
 
-<VBox alignment="CENTER" spacing="20.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.restaurante.Controller.MenuController">
+<VBox alignment="CENTER" spacing="20.0" xmlns="http://javafx.com/javafx/8.0.171" 
+    xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.restaurante.Controller.MenuController">
     <stylesheets>
         <URL value="@style.css" />
     </stylesheets>
+    
     <children>
-      <Label fx:id="titulo" text='"Título"' />
-      <Button fx:id="nj" text="Novo Jogo" onAction="#novoJogo"/>
-   </children>
-   <padding>
+      
+        <Label fx:id="titulo" text='Restaurante Amalgamado' />
+        
+        <Button fx:id="nj" text="Novo Jogo" onAction="#novoJogo"/>
+        <Button fx:id="sv" text="Saves" onAction="#save"/>
+        <Button fx:id="cd" text="Créditos" onAction="#creditos"/>
+        <Button fx:id="sj" text="Sair" onAction="#sairJogo"/>
+   
+    </children>
+   
+    <padding>
       <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
    </padding>
 </VBox>
