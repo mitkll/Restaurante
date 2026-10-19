@@ -23,4 +23,16 @@ public class MenuController {
     private void novoJogo() throws IOException {
         App.setRoot("jogo");
     }
+    
+    @FXML
+    private void creditos() throws IOException 
+    {
+        App.setRoot("credito");
+    }
+    
+    @FXML
+    private void sairJogo() throws IOException 
+    {
+        //App.setRoot();
+    }
 }
