@@ -12,8 +12,8 @@
     </stylesheets>
     <children>
        <Label fx:id="dd" text="a"/>
-       <Button fx:id="voltar" text="Voltar" onAction="#voltar" />
-       <Button fx:id="comprar" text="Comprar carteira de trabalho noturno: $1500" onAction="#noite" />
+       <Button StyleClass="basic" text="Voltar" onAction="#voltar" />
+       <Button StyleClass="basic" text="Comprar carteira de trabalho noturno: $1500" onAction="#noite" />
    </children>
    <padding>
       <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />

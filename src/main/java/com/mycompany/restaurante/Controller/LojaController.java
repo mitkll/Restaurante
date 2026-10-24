@@ -3,13 +3,14 @@ package com.mycompany.restaurante.Controller;
 import com.mycompany.restaurante.App;
 import com.mycompany.restaurante.Controller.JogoController;
 import com.mycompany.restaurante.Model.Save;
+import com.mycompany.restaurante.Model.Saves;
 import java.io.IOException;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 
 public class LojaController {
     @FXML private Label dd;    
-    private Save save = JogoController.save;
+    private final Save save = Saves.getSave();
     
     @FXML
     private void initialize(){
@@ -43,7 +44,7 @@ public class LojaController {
             save.setNoite(true);
             Alert aviso = new Alert(Alert.AlertType.INFORMATION);
             aviso.setTitle("");
-            aviso.setHeaderText(null); // tira a faixa de cima
+            aviso.setHeaderText(null);
             aviso.setContentText("Parabéns por comprar o turno da noite!");
             aviso.showAndWait();
         }
