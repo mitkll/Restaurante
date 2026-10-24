@@ -21,33 +21,59 @@ import java.util.List;
  */
 public class SaveDAO {
     Conexao conexao = new Conexao();
-    public int add(Save s) throws SQLException{
-        String sql = "INSERT INTO save (nome, dia, dinheiro, noite, upgrades) VALUES (?, ?, ?, ?, ?) RETURNING id";
+    public void add(Save s) throws SQLException{
+        String sql = "INSERT INTO save (id, nome, dia, dinheiro, noite, upgrades) VALUES (?, ?, ?, ?, ?, ?)";
         
         Connection connection = conexao.conectar();
 
         PreparedStatement stmt = connection.prepareStatement(sql);
 
-        stmt.setString(1, s.getNome());
-        stmt.setInt(2, s.getDia());
-        stmt.setDouble(3, s.getDinheiro());
-        stmt.setBoolean(4, s.isNoite());
+        stmt.setInt(1, s.getId());
+        stmt.setString(2, s.getNome());
+        stmt.setInt(3, s.getDia());
+        stmt.setDouble(4, s.getDinheiro());
+        stmt.setBoolean(5, s.isNoite());
 
         String[] upgradesArray = s.getUpgrades().toArray(new String[0]);
         Array up = connection.createArrayOf("text", upgradesArray);
 
-        stmt.setArray(5, up);
-
-        try (ResultSet rs = stmt.executeQuery()) {
-            if (rs.next()) {
-                int id = rs.getInt("id");
-                s.setId(id);           
-                return id;
-            }
-        }
-        
-        return -1;
+        stmt.setArray(6, up);
+        stmt.executeUpdate();
     }
+    
+    public List<Save> saveId(int id) throws SQLException{
+        List<Save> lista = new ArrayList<>();
+        String sql = "SELECT * FROM save WHERE id=?";
+        
+        Connection connection = conexao.conectar();
+
+        PreparedStatement stmt = connection.prepareStatement(sql);
+        stmt.setInt(1, id);
+        
+        ResultSet rs = stmt.executeQuery();
+        while(rs.next()){
+            Array sqlArray = rs.getArray("upgrades");
+            ArrayList<String> upgrades = new ArrayList<>();
+
+            if (sqlArray != null) {
+                String[] array = (String[]) sqlArray.getArray();
+                upgrades = new ArrayList<>(Arrays.asList(array));
+            }
+            
+            Save s = new Save(
+                    rs.getInt("id"),
+                    rs.getString("nome"),
+                    rs.getInt("dia"),
+                    rs.getDouble("dinheiro"),
+                    rs.getBoolean("noite"),
+                    upgrades
+            );
+            lista.add(s);
+        }
+
+        return lista;
+    }
+    
     public List<Save> save() throws SQLException    {
         String sql = "SELECT * FROM save";
         
@@ -81,19 +107,20 @@ public class SaveDAO {
     }
     
     public void atualizar(Save s) throws SQLException {
-        String sql = "UPDATE save SET dinheiro=?, noite=?, upgrade=? WHERE id = ?";
+        String sql = "UPDATE save SET dia=?, dinheiro=?, noite=?, upgrade=? WHERE id = ?";
         
             Connection connection = conexao.conectar(); 
             PreparedStatement stmt = connection.prepareStatement(sql);
 
-            stmt.setDouble(1, s.getDinheiro());
-            stmt.setBoolean(2, s.isNoite());
+            stmt.setInt(1, s.getDia());
+            stmt.setDouble(2, s.getDinheiro());
+            stmt.setBoolean(3, s.isNoite());
             
             String[] upgradesArray = s.getUpgrades().toArray(new String[0]);
             Array up = connection.createArrayOf("text", upgradesArray);
             
-            stmt.setArray(3, up);
-            stmt.setInt(4, s.getId());
+            stmt.setArray(4, up);
+            stmt.setInt(5, s.getId());
 
             int linhas = stmt.executeUpdate();
             if (linhas > 0) {
@@ -109,5 +136,6 @@ public class SaveDAO {
         PreparedStatement stmt = connection.prepareStatement(sql);
         
         stmt.setInt(1, id);
+        stmt.executeUpdate();
     }
 }
