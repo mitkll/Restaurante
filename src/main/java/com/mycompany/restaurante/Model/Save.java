@@ -15,31 +15,27 @@ public class Save {
     private String nome;
     private int id, dia;
     private double dinheiro;
-    private boolean noite;
     private List<String> upgrades = new ArrayList<>();
 
-    public Save(int id, String nome, int dia, double dinheiro, boolean noite, ArrayList upgrades) {
+    public Save(int id, String nome, int dia, double dinheiro, ArrayList upgrades) {
         this.id = id;
         this.nome = nome;
         this.dia = dia;
         this.dinheiro = dinheiro;
-        this.noite = noite;
         this.upgrades = upgrades;
     }
     
-    public Save(String nome, int dia, double dinheiro, boolean noite, ArrayList upgrades) {
+    public Save(String nome, int dia, double dinheiro, ArrayList upgrades) {
         this.nome = nome;
         this.dia = dia;
         this.dinheiro = dinheiro;
-        this.noite = noite;
         this.upgrades = upgrades;
     }
     
-    public Save(String nome, int dia, double dinheiro, boolean noite){
+    public Save(String nome, int dia, double dinheiro){
         this.nome = nome;
         this.dia = dia;
         this.dinheiro = dinheiro;
-        this.noite = noite;
     }
 
     public Save() {
@@ -77,15 +73,7 @@ public class Save {
     public void setDinheiro(double dinheiro) {
         this.dinheiro = dinheiro;
     }
-
-    public boolean isNoite(){
-        return noite;
-    }
-
-    public void setNoite(boolean noite){
-        this.noite = noite;
-    }
-
+    
     public List<String> getUpgrades() {
         return upgrades;
     }

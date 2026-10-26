@@ -22,7 +22,7 @@ import java.util.List;
 public class SaveDAO {
     Conexao conexao = new Conexao();
     public void add(Save s) throws SQLException{
-        String sql = "INSERT INTO save (id, nome, dia, dinheiro, noite, upgrades) VALUES (?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO save (id, nome, dia, dinheiro, upgrades) VALUES ( ?, ?, ?, ?, ?)";
         
         Connection connection = conexao.conectar();
 
@@ -32,12 +32,11 @@ public class SaveDAO {
         stmt.setString(2, s.getNome());
         stmt.setInt(3, s.getDia());
         stmt.setDouble(4, s.getDinheiro());
-        stmt.setBoolean(5, s.isNoite());
 
         String[] upgradesArray = s.getUpgrades().toArray(new String[0]);
         Array up = connection.createArrayOf("text", upgradesArray);
 
-        stmt.setArray(6, up);
+        stmt.setArray(5, up);
         stmt.executeUpdate();
     }
     
@@ -65,7 +64,6 @@ public class SaveDAO {
                     rs.getString("nome"),
                     rs.getInt("dia"),
                     rs.getDouble("dinheiro"),
-                    rs.getBoolean("noite"),
                     upgrades
             );
             lista.add(s);
@@ -87,8 +85,8 @@ public class SaveDAO {
 
             s.setId(rs.getInt("id"));
             s.setNome(rs.getString("nome"));
+            s.setDia(rs.getInt("dia"));
             s.setDinheiro(rs.getDouble("dinheiro"));
-            s.setNoite(rs.getBoolean("noite"));
             Array sqlArray = rs.getArray("upgrades");
 
             if (sqlArray != null) {
@@ -107,20 +105,19 @@ public class SaveDAO {
     }
     
     public void atualizar(Save s) throws SQLException {
-        String sql = "UPDATE save SET dia=?, dinheiro=?, noite=?, upgrade=? WHERE id = ?";
+        String sql = "UPDATE save SET dia=?, dinheiro=?, upgrades=? WHERE id = ?";
         
             Connection connection = conexao.conectar(); 
             PreparedStatement stmt = connection.prepareStatement(sql);
 
             stmt.setInt(1, s.getDia());
             stmt.setDouble(2, s.getDinheiro());
-            stmt.setBoolean(3, s.isNoite());
             
             String[] upgradesArray = s.getUpgrades().toArray(new String[0]);
             Array up = connection.createArrayOf("text", upgradesArray);
             
-            stmt.setArray(4, up);
-            stmt.setInt(5, s.getId());
+            stmt.setArray(3, up);
+            stmt.setInt(4, s.getId());
 
             int linhas = stmt.executeUpdate();
             if (linhas > 0) {

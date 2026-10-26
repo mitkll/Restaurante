@@ -9,8 +9,8 @@ import java.util.List;
 public class SaveC {
     SaveDAO dao = new SaveDAO();
     
-    public Save inserir(int id, String n, int d, double dd, boolean nt, ArrayList u) throws SQLException{
-        Save s = new Save(id,n,d,dd,nt,u);
+    public Save inserir(int id, String n, int d, double dd, ArrayList u) throws SQLException{
+        Save s = new Save(id,n,d,dd,u);
         dao.add(s);
         return s;
     }

@@ -30,11 +30,11 @@ public class JogoController {
     @FXML private VBox card;//, background;
     
     SaveC sc = new SaveC();
-    private static LocalTime horaS  = LocalTime.of(10,0);
+    private static LocalTime horaS  = LocalTime.of(22,0);
     private final Save save = Saves.getSave();
     
     private LocalTime hora;
-    private int dia, i = 0;
+    private int dia;
     private Timeline relogio;
     
     @FXML
@@ -55,6 +55,16 @@ public class JogoController {
         if (conf.isPresent() && conf.get() == ButtonType.OK) {
             App.setRoot("menu");
         }
+    }
+    
+    @FXML
+    private void sairF() throws IOException, SQLException{
+        dia++;
+        horaS = hora;
+        save.setDia(dia);
+        sc.atualizar(save);
+        sair();
+        
     }
     
     @FXML
@@ -88,19 +98,8 @@ public class JogoController {
             new KeyFrame(Duration.seconds(5), e -> {
                 hora = hora.plusMinutes(10);
                 relogioFX();
-
-                if (!save.isNoite()) {
-                    if (!hora.isBefore(LocalTime.of(15, 0))) {
-                        fim();
-                    }
-                } else {
-                    if (hora.isAfter(LocalTime.of(10, 0)) && !hora.isBefore(LocalTime.of(15, 0)) 
-                        && hora.isBefore(LocalTime.of(22, 0))) {
-                        fim();
-                    } 
-                    else if (!hora.isBefore(LocalTime.of(3, 0)) && hora.isBefore(LocalTime.of(10, 0))) {
-                        fim();
-                    }
+                if(!hora.isBefore(LocalTime.of(4, 0)) && hora.isBefore(LocalTime.of(10, 0))) {//3 min e meio de jogatina
+                    fim();
                 }
             })
         );
@@ -117,26 +116,11 @@ public class JogoController {
     
     @FXML
     private void continuar() throws InterruptedException, SQLException{
-        if (!save.isNoite()) {
-            hora = LocalTime.of(10, 0);
-            dia++;
-            horaS = hora;
-            save.setDia(dia);
-            sc.atualizar(save);
-            initialize();
-        } else {
-            if (hora.getHour() >= 15 && hora.getHour() < 22) {
-                hora = LocalTime.of(22, 0);
-                horaS = hora;
-                initialize();
-            } else {
-                hora = LocalTime.of(10, 0);
-                dia++;
-                horaS = hora;
-                save.setDia(dia);
-                sc.atualizar(save);
-                initialize();
-            }
-        }
+        hora = LocalTime.of(22, 0);
+        dia++;
+        horaS = hora;
+        save.setDia(dia);
+        sc.atualizar(save);
+        initialize();
     }
 }

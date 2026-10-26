@@ -140,8 +140,8 @@ public class SaveController {
         Optional<ButtonType> result = nome.showAndWait();
         if(result.isPresent() && result.get() == ButtonType.OK){
             String nm = n.getText();
-            sc.inserir(id, nm, 1, 50.0, false, new ArrayList<>());
-            carregar(new Save(id, nm, 1, 50.0, false, new ArrayList<>()));
+            sc.inserir(id, nm, 1, 50.0, new ArrayList<>());
+            carregar(new Save(id, nm, 1, 50.0, new ArrayList<>()));
         }
     }
     
