@@ -14,10 +14,10 @@
     
     <children>
         <Label text="blablabla"/>
-        <Button StyleClass="save" fx:id="um" text="Novo Jogo 1."/>
-        <Button StyleClass="save" fx:id="dois" text="Novo Jogo 2."/>
-        <Button StyleClass="save" fx:id="tres" text="Novo Jogo 3."/>
-        <Button StyleClass="basic" fx:id="save" text="Voltar" onAction="#voltar"/>
+        <Button styleClass="save" fx:id="um" text="Novo Jogo 1."/>
+        <Button styleClass="save" fx:id="dois" text="Novo Jogo 2."/>
+        <Button styleClass="save" fx:id="tres" text="Novo Jogo 3."/>
+        <Button styleClass="basic" fx:id="save" text="Voltar" onAction="#voltar"/>
     </children>
     <padding>
         <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />

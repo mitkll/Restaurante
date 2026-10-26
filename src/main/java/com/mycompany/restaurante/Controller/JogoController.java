@@ -12,6 +12,7 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Optional;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.fxml.FXML;
@@ -43,6 +44,17 @@ public class JogoController {
         save.setDia(dia);
         
         App.setRoot("loja");
+    }
+    @FXML
+    private void sair() throws IOException{
+        Alert det = new Alert(Alert.AlertType.CONFIRMATION);
+        det.setTitle("Você terá que recomeçar o dia");
+        det.setHeaderText("Tem certeza que quer sair?");
+
+        Optional<ButtonType> conf = det.showAndWait();
+        if (conf.isPresent() && conf.get() == ButtonType.OK) {
+            App.setRoot("menu");
+        }
     }
     
     @FXML
