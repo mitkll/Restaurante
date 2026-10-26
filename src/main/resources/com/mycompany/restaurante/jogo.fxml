@@ -33,11 +33,12 @@
                 <Label fx:id="total" text="Total: "/>
                 <Label fx:id="valorT" text="a"/>
             </HBox>
-            <Button fx:id="coninuar" text="Próximo dia" onAction="#continuar" />
+            <Button styleClass="basic" fx:id="coninuar" text="Próximo dia" onAction="#continuar" />
         </children>
         <padding>
             <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
         </padding>
     </VBox>
-    <Button fx:id="loja" text="Loja" onAction="#loja" styleClass="button"/>
+    <Button styleClass="basic" fx:id="loja" text="Loja" onAction="#loja"/>
+    <Button styleClass="basic" fx:id="sair" text="Sair" onAction="#sair"/>
 </VBox>

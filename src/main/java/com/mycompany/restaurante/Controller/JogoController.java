@@ -5,10 +5,14 @@
 package com.mycompany.restaurante.Controller;
 
 import com.mycompany.restaurante.App;
+import com.mycompany.restaurante.DAO.Controller.SaveC;
 import com.mycompany.restaurante.Model.Save;
+import com.mycompany.restaurante.Model.Saves;
 import java.io.IOException;
+import java.sql.SQLException;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Optional;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.fxml.FXML;
@@ -25,9 +29,9 @@ public class JogoController {
     @FXML private Button loja;
     @FXML private VBox card;//, background;
     
+    SaveC sc = new SaveC();
     private static LocalTime horaS  = LocalTime.of(10,0);
-    private static int diaS = 1;
-    public static Save save = new Save(1, 3000, false);
+    private final Save save = Saves.getSave();
     
     private LocalTime hora;
     private int dia, i = 0;
@@ -37,9 +41,20 @@ public class JogoController {
     private void loja() throws IOException {
         relogio.stop();
         horaS = hora;
-        diaS = dia;
+        save.setDia(dia);
         
         App.setRoot("loja");
+    }
+    @FXML
+    private void sair() throws IOException{
+        Alert det = new Alert(Alert.AlertType.CONFIRMATION);
+        det.setTitle("Você terá que recomeçar o dia");
+        det.setHeaderText("Tem certeza que quer sair?");
+
+        Optional<ButtonType> conf = det.showAndWait();
+        if (conf.isPresent() && conf.get() == ButtonType.OK) {
+            App.setRoot("menu");
+        }
     }
     
     @FXML
@@ -55,7 +70,7 @@ public class JogoController {
                 + "-fx-padding: 3 15;"
                 + "-fx-opacity: 1");
         hora = horaS;
-        dia = diaS;
+        dia = save.getDia();
         relogioFX();
         relogio();
     }
@@ -101,12 +116,13 @@ public class JogoController {
     }
     
     @FXML
-    private void continuar() throws InterruptedException{
+    private void continuar() throws InterruptedException, SQLException{
         if (!save.isNoite()) {
             hora = LocalTime.of(10, 0);
             dia++;
             horaS = hora;
-            diaS = dia;
+            save.setDia(dia);
+            sc.atualizar(save);
             initialize();
         } else {
             if (hora.getHour() >= 15 && hora.getHour() < 22) {
@@ -117,7 +133,8 @@ public class JogoController {
                 hora = LocalTime.of(10, 0);
                 dia++;
                 horaS = hora;
-                diaS = dia;
+                save.setDia(dia);
+                sc.atualizar(save);
                 initialize();
             }
         }

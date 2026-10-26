@@ -13,15 +13,13 @@
     </stylesheets>
     
     <children>
-      
         <Label fx:id="titulo" text='Restaurante Amalgamado' />
+        <Button styleClass="basic" fx:id="nj" text="Jogo" onAction="#novoJogo"/>
+        <Button styleClass="basic" fx:id="cd" text="Créditos" onAction="#creditos"/>
+        <Button styleClass="basic" fx:id="sj" text="Sair" onAction="#sairJogo"/>
+   </children>
+      
         
-        <Button fx:id="nj" text="Novo Jogo" onAction="#novoJogo"/>
-        <Button fx:id="sv" text="Saves" onAction="#save"/>
-        <Button fx:id="cd" text="Créditos" onAction="#creditos"/>
-        <Button fx:id="sj" text="Sair" onAction="#sairJogo"/>
-   
-    </children>
    
     <padding>
       <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
