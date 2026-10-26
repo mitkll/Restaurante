@@ -6,6 +6,8 @@ package com.mycompany.restaurante.Controller;
 
 import com.mycompany.restaurante.App;
 import com.mycompany.restaurante.DAO.Controller.SaveC;
+import com.mycompany.restaurante.Model.Cliente;
+import com.mycompany.restaurante.Model.Clientes;
 import com.mycompany.restaurante.Model.Save;
 import com.mycompany.restaurante.Model.Saves;
 import java.io.IOException;
@@ -13,6 +15,7 @@ import java.sql.SQLException;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Optional;
+import java.util.Random;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.fxml.FXML;
@@ -32,6 +35,8 @@ public class JogoController {
     SaveC sc = new SaveC();
     private static LocalTime horaS  = LocalTime.of(10,0);
     private final Save save = Saves.getSave();
+    private final Cliente cliente = Clientes.getCliente();
+    private Random idCliente = new Random();
     
     private LocalTime hora;
     private int dia, i = 0;
