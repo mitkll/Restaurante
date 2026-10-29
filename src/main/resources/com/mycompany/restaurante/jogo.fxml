@@ -6,39 +6,21 @@
 <?import java.net.URL?>
 <?import javafx.geometry.Insets?>
 
-<VBox alignment="TOP_CENTER" spacing="20.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.restaurante.Controller.JogoController">
+<VBox alignment="TOP_CENTER" spacing="20.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" 
+      fx:id="jogo" fx:controller="com.mycompany.restaurante.Controller.JogoController">
+    
     <stylesheets>
         <URL value="@style.css" />
     </stylesheets>
     <Label fx:id="h" text="a"/>
     <Label fx:id="d" text="a"/>
+    <Region VBox.vgrow="ALWAYS" />
+    <HBox alignment="BASELINE_RIGHT">
+        <Button styleClass="basic" fx:id="loja" text="Loja[I]" onAction="#loja"/>
+        <Button styleClass="basic" fx:id="sair" text="Sair[ESC]" onAction="#sair"/>
+    </HBox>
+    
     <padding>
         <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
     </padding>
-    <VBox fx:id="card" alignment="CENTER" spacing="20.0">
-        <children>
-            <HBox>
-                <Label fx:id="gasto" text="Gastos: "/>
-                <Label fx:id="valorG" text="a"/>
-            </HBox>
-            <HBox>
-                <Label fx:id="conta" text="Contas: "/>
-                <Label fx:id="valorC" text="a"/>
-            </HBox>
-            <HBox>
-                <Label fx:id="dinheiro" text="Recebido: "/>
-                <Label fx:id="valorD" text="a"/>
-            </HBox>
-            <HBox>
-                <Label fx:id="total" text="Total: "/>
-                <Label fx:id="valorT" text="a"/>
-            </HBox>
-            <Button styleClass="basic" fx:id="coninuar" text="Próximo dia" onAction="#continuar" />
-        </children>
-        <padding>
-            <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
-        </padding>
-    </VBox>
-    <Button styleClass="basic" fx:id="loja" text="Loja" onAction="#loja"/>
-    <Button styleClass="basic" fx:id="sair" text="Sair" onAction="#sair"/>
 </VBox>

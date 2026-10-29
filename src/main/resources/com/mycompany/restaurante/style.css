@@ -7,6 +7,13 @@
     -fx-background-color: #424242;
 }
 
+#final{
+    -fx-bakcground-color: rgb(0, 0, 0, 0.5);
+}
+
+#card{
+    -fx-background-color: white;
+}
 .button.basic{
     -fx-background-color: transparent;
     -fx-font-family: 'VCR OSD Mono', sans-serif;

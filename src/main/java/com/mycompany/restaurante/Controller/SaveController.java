@@ -87,7 +87,9 @@ public class SaveController {
 
                 ButtonType jogar = new ButtonType("Jogar");
                 ButtonType excluir = new ButtonType("Deletar Save");
-                opcao.getButtonTypes().setAll(jogar, excluir);
+                ButtonType cancelar = new ButtonType("Cancelar");
+                cancelar = ButtonType.CANCEL;
+                opcao.getButtonTypes().setAll(jogar, excluir, cancelar);
 
                 Optional<ButtonType> result = opcao.showAndWait();
                 if (result.isPresent()) {
@@ -101,7 +103,7 @@ public class SaveController {
                         Alert det = new Alert(Alert.AlertType.CONFIRMATION);
                         det.setTitle("Tem certeza que quer excluir permanentemente?");
                         det.setHeaderText(null);
-
+                        
                         Optional<ButtonType> conf = det.showAndWait();
                         if (conf.isPresent() && conf.get() == ButtonType.OK) {
                             try {

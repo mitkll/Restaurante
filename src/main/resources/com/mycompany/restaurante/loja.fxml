@@ -6,13 +6,14 @@
 <?import java.net.URL?>
 <?import javafx.geometry.Insets?>
 
-<VBox alignment="CENTER" spacing="20.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.restaurante.Controller.LojaController">
+<VBox alignment="TOP_RIGHT" spacing="20.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.restaurante.Controller.LojaController">
     <stylesheets>
         <URL value="@style.css" />
     </stylesheets>
     <children>
-       <Label fx:id="dd" text="a"/>
-       <Button StyleClass="basic" text="Voltar" onAction="#voltar" />
+       <Label fx:id="dd" text="a" />
+       <Region VBox.vgrow="ALWAYS" />
+       <Button styleClass="basic" text="Voltar" onAction="#voltar" alignment="BASELINE_RIGHT"/>
    </children>
    <padding>
       <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
