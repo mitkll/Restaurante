@@ -108,8 +108,10 @@ public class SaveController {
                         if (conf.isPresent() && conf.get() == ButtonType.OK) {
                             try {
                                 sc.delete(id);
-                                botao.setText("Novo Jogo "+id+".");
+                                initialize();
                             } catch (SQLException ex) {
+                                System.out.println(ex);
+                            } catch (IOException ex) {
                                 System.out.println(ex);
                             }
                         }
@@ -142,8 +144,17 @@ public class SaveController {
         Optional<ButtonType> result = nome.showAndWait();
         if(result.isPresent() && result.get() == ButtonType.OK){
             String nm = n.getText();
-            sc.inserir(id, nm, 1, 50.0, new ArrayList<>());
-            carregar(new Save(id, nm, 1, 50.0, new ArrayList<>()));
+            if(!nm.isEmpty()){
+                sc.inserir(id, nm, 1, 50.0, new ArrayList<>());
+                carregar(new Save(id, nm, 1, 50.0, new ArrayList<>()));
+            }else{
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("");
+                alert.setHeaderText(null);
+                alert.setContentText("Escolha um nome");
+                alert.showAndWait();
+            }
+            
         }
     }
     

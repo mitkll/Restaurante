@@ -54,6 +54,8 @@ public class JogoController {
 
         Optional<ButtonType> conf = det.showAndWait();
         if (conf.isPresent() && conf.get() == ButtonType.OK) {
+            relogio.stop();
+            horaS = LocalTime.of(22, 0);
             App.setRoot("menu");
         }
     }
