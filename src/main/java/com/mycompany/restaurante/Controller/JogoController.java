@@ -6,6 +6,8 @@ package com.mycompany.restaurante.Controller;
 
 import com.mycompany.restaurante.App;
 import com.mycompany.restaurante.DAO.Controller.SaveC;
+import com.mycompany.restaurante.Model.Cliente;
+import com.mycompany.restaurante.Model.Clientes;
 import com.mycompany.restaurante.Model.Save;
 import com.mycompany.restaurante.Model.Saves;
 import java.io.IOException;
@@ -13,6 +15,7 @@ import java.sql.SQLException;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Optional;
+import java.util.Random;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.fxml.FXML;
@@ -32,10 +35,13 @@ public class JogoController {
     SaveC sc = new SaveC();
     public static LocalTime horaS  = LocalTime.of(22,0);
     private final Save save = Saves.getSave();
+    private final Cliente cliente = Clientes.getCliente();
     
     private LocalTime hora;
     private int dia;
-    private Timeline relogio;
+    public static boolean direta, esquerda, centro;
+    private Timeline relogio, idC, tempo;
+    private Random id = new Random();
     
     @FXML
     private void loja() throws IOException {
@@ -107,6 +113,29 @@ public class JogoController {
         );
         relogio.setCycleCount(Timeline.INDEFINITE);
         relogio.play();
+    }
+    
+    private void cliente(){
+        tempo = new Timeline();
+        idC = new Timeline();
+        idC.getKeyFrames().add(
+            new KeyFrame(Duration.seconds(15), e ->{
+                if(!Clientes.cliente.isEmpty() && Clientes.cliente.size() == 3){
+                    tempo.getKeyFrames().add(
+                        new KeyFrame(Duration.seconds(10), ex ->{
+                            //se ele não foi atendido ou se o tempo não acabaou
+                            cliente.setTempo(cliente.getTempo() - 1);
+                        })
+                    );
+                }else{
+                    cliente.setId(id.nextInt(8));
+                    cliente.setTempo(5);
+                    Clientes.cliente.add(cliente);
+                }
+                
+            })
+        );
+        
     }
     
     private void fim() throws IOException{
