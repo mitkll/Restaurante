@@ -20,6 +20,7 @@ import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.*;
 import javafx.util.Duration;
@@ -31,6 +32,7 @@ import javafx.util.Duration;
 public class JogoController {
     @FXML private Label h, d;
     @FXML private VBox jogo;
+    @FXML private ImageView monstro1, monstro2, monstro3;
     
     SaveC sc = new SaveC();
     public static LocalTime horaS  = LocalTime.of(22,0);
@@ -38,7 +40,7 @@ public class JogoController {
     private final Cliente cliente = Clientes.getCliente();
     
     private LocalTime hora;
-    private int dia;
+    private int dia, posicao;
     public static boolean direta, esquerda, centro;
     private Timeline relogio, idC, tempo;
     private Random id = new Random();
@@ -123,16 +125,26 @@ public class JogoController {
                 if(!Clientes.cliente.isEmpty() && Clientes.cliente.size() == 3){
                     tempo.getKeyFrames().add(
                         new KeyFrame(Duration.seconds(10), ex ->{
-                            //se ele não foi atendido ou se o tempo não acabaou
-                            cliente.setTempo(cliente.getTempo() - 1);
+                            for(int i = 0; i < Clientes.cliente.size(); i++){
+                                if(Clientes.cliente.get(i).getTempo() > 0 && !Clientes.cliente.get(i).isAtendido()){
+                                    Clientes.cliente.get(i).setTempo(Clientes.cliente.get(i).getTempo() - 1);
+                                }else if(Clientes.cliente.get(i).getTempo() <= 0 || Clientes.cliente.get(i).isAtendido()){
+                                    Clientes.cliente.remove(i);
+                                }
+                            }    
                         })
                     );
                 }else{
-                    cliente.setId(id.nextInt(8));
-                    cliente.setTempo(5);
-                    Clientes.cliente.add(cliente);
-                }
-                
+                    if(Clientes.cliente.size() < 3){                            
+                        cliente.setTempo(5);
+                        cliente.setAtendido(false);
+                        cliente.setId(id.nextInt(8));
+                        Clientes.cliente.add(cliente);
+                        if(Clientes.cliente.get(0) != null){
+                            
+                        }
+                    }
+                }                
             })
         );
         

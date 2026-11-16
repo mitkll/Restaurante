@@ -12,6 +12,12 @@
     <stylesheets>
         <URL value="@style.css" />
     </stylesheets>
+    <ImageView fx:id="monstro1">
+    </ImageView>
+    <ImageView fx:id="monstro2">
+    </ImageView>
+    <ImageView fx:id="monstro3">
+    </ImageView>
     <Label fx:id="h" text="a"/>
     <Label fx:id="d" text="a"/>
     <Region VBox.vgrow="ALWAYS" />
