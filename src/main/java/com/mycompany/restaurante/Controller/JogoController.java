@@ -14,13 +14,15 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.Optional;
 import java.util.Random;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.fxml.FXML;
+import javafx.geometry.Pos;
 import javafx.scene.control.*;
-import javafx.scene.image.ImageView;
+import javafx.scene.image.*;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.*;
 import javafx.util.Duration;
@@ -37,17 +39,18 @@ public class JogoController {
     SaveC sc = new SaveC();
     public static LocalTime horaS  = LocalTime.of(22,0);
     private final Save save = Saves.getSave();
-    private final Cliente cliente = Clientes.getCliente();
+    //private final Cliente cliente = Clientes.getCliente();
     
     private LocalTime hora;
     private int dia, posicao;
-    public static boolean direta, esquerda, centro;
     private Timeline relogio, idC, tempo;
     private Random id = new Random();
     
     @FXML
     private void loja() throws IOException {
         relogio.stop();
+        idC.stop();
+        tempo.stop();
         horaS = hora;
         save.setDia(dia);
         
@@ -63,6 +66,9 @@ public class JogoController {
         Optional<ButtonType> conf = det.showAndWait();
         if (conf.isPresent() && conf.get() == ButtonType.OK) {
             relogio.stop();
+            idC.stop();
+            tempo.stop();
+            Clientes.cliente.clear();
             horaS = LocalTime.of(22, 0);
             App.setRoot("menu");
         }
@@ -89,6 +95,10 @@ public class JogoController {
         dia = save.getDia();
         relogioFX();
         relogio();
+        cliente();
+        monstro1.setImage(null);
+        monstro2.setImage(null);
+        monstro3.setImage(null);
     }
     
     @FXML
@@ -120,38 +130,92 @@ public class JogoController {
     private void cliente(){
         tempo = new Timeline();
         idC = new Timeline();
+
         idC.getKeyFrames().add(
-            new KeyFrame(Duration.seconds(15), e ->{
-                if(!Clientes.cliente.isEmpty() && Clientes.cliente.size() == 3){
-                    tempo.getKeyFrames().add(
-                        new KeyFrame(Duration.seconds(10), ex ->{
-                            for(int i = 0; i < Clientes.cliente.size(); i++){
-                                if(Clientes.cliente.get(i).getTempo() > 0 && !Clientes.cliente.get(i).isAtendido()){
-                                    Clientes.cliente.get(i).setTempo(Clientes.cliente.get(i).getTempo() - 1);
-                                }else if(Clientes.cliente.get(i).getTempo() <= 0 || Clientes.cliente.get(i).isAtendido()){
-                                    Clientes.cliente.remove(i);
-                                }
-                            }    
-                        })
-                    );
-                }else{
-                    if(Clientes.cliente.size() < 3){                            
-                        cliente.setTempo(5);
-                        cliente.setAtendido(false);
-                        cliente.setId(id.nextInt(8));
-                        Clientes.cliente.add(cliente);
-                        if(Clientes.cliente.get(0) != null){
-                            
-                        }
-                    }
-                }                
+            new KeyFrame(Duration.seconds(10), e -> {
+                if (Clientes.cliente.size() >= 3) {
+                    Tempo();
+                } 
+                else {
+                    Cliente novo = new Cliente(id.nextInt(8), 5, 0, false, new ArrayList<>());
+                    Clientes.cliente.add(novo);
+                    clienteImg();
+                    Tempo();
+                }
             })
         );
-        
+
+        idC.setCycleCount(Timeline.INDEFINITE);
+        idC.play();
+
+        tempo.setCycleCount(Timeline.INDEFINITE);
+        tempo.play();
+    }
+
+    private void Tempo() {
+        if (tempo.getKeyFrames().isEmpty()) {
+            tempo.getKeyFrames().add(
+                new KeyFrame(Duration.seconds(10), ex -> {
+                    for (int i = Clientes.cliente.size() - 1; i >= 0; i--) {
+                        Cliente c = Clientes.cliente.get(i);
+
+                        if (c.getTempo() > 0 && !c.isAtendido()) {
+                            c.setTempo(c.getTempo() - 1);
+                        } else {
+                            imgC(i);
+                            Clientes.cliente.remove(i);
+                        }
+                    }
+                })
+            );
+        }
+    }
+    
+    private void imgC(int i) {
+        switch(i){
+            case 0:
+                 monstro1.setImage(null);
+            case 1:
+                monstro2.setImage(null);
+            case 2:
+                monstro3.setImage(null);
+        }
     }
     
     private void fim() throws IOException{
         relogio.stop();
+        idC.stop();
+        tempo.stop();
+        monstro1.setImage(null);
+        monstro2.setImage(null);
+        monstro3.setImage(null);
+        Clientes.cliente.clear();
         App.setRoot("final");
+    }
+    
+    @FXML
+    private void clienteImg() {
+        monstro1.setImage(null);
+        monstro2.setImage(null);
+        monstro3.setImage(null);
+
+        for (int i = 0; i < Clientes.cliente.size(); i++) {
+            Cliente c = Clientes.cliente.get(i);
+            String caminho = "/com/mycompany/restaurante/Monsters/M1.png";
+
+            Image img = new Image(getClass().getResource(caminho).toExternalForm());
+
+            switch (i) {
+                case 0:
+                    monstro1.setImage(img);
+                    break;
+                case 1:
+                    monstro2.setImage(img);
+                    break;
+                case 2:
+                    monstro3.setImage(img);
+                    break;
+            }
+        }
     }
 }
