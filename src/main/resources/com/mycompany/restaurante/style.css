@@ -14,6 +14,7 @@
 #card{
     -fx-background-color: white;
 }
+
 .button.basic{
     -fx-background-color: transparent;
     -fx-font-family: 'VCR OSD Mono', sans-serif;

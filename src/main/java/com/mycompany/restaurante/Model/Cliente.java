@@ -1,5 +1,6 @@
 package com.mycompany.restaurante.Model;
 
+import com.mycompany.restaurante.Model.Enum.Receitas;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -7,7 +8,7 @@ import java.util.Random;
 public class Cliente {
     private int tempo, raiva, id;
     private boolean atendido;
-    private List<String> pedido = new ArrayList<>();
+    private List<Receitas> pedido = new ArrayList<>();
 
     public Cliente(int id, int tempo, int raiva, boolean atendido, ArrayList pedido) {
         this.id = id;
@@ -49,11 +50,11 @@ public class Cliente {
         this.atendido = atendido;
     }
 
-    public List<String> getPedido() {
+    public List<Receitas> getPedido() {
         return pedido;
     }
 
-    public void setPedido(List<String> pedido) {
+    public void setPedido(List<Receitas> pedido) {
         this.pedido = pedido;
     }
     

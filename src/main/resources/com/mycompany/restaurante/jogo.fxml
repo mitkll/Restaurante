@@ -16,10 +16,22 @@
         <URL value="@style.css"/>
     </stylesheets>
 
-    <ImageView fx:id="monstro1" fitHeight="120" preserveRatio="true"/>
-    <ImageView fx:id="monstro2" fitHeight="120" preserveRatio="true"/>
-    <ImageView fx:id="monstro3" fitHeight="120" preserveRatio="true"/>
-
+    <VBox alignment="CENTER_LEFT" StackPane.alignment="CENTER_LEFT">
+        <Label fx:id="p1" text=""/>
+        <Label fx:id="t1" text=""/>
+        <ImageView fx:id="monstro1" fitHeight="300" preserveRatio="true"/>
+    </VBox>
+    <VBox alignment="CENTER" StackPane.alignment="CENTER">
+        <Label fx:id="p2" text=""/>
+        <Label fx:id="t2" text=""/>
+        <ImageView fx:id="monstro2" fitHeight="300" preserveRatio="true"/>
+    </VBox>
+    <VBox alignment="CENTER_RIGHT" StackPane.alignment="CENTER_RIGHT">
+        <Label fx:id="p3" text=""/>
+        <Label fx:id="t3" text=""/>
+        <ImageView fx:id="monstro3" fitHeight="300" preserveRatio="true"/>
+    </VBox>
+    
     <VBox fx:id="jogo" alignment="TOP_CENTER" spacing="5.0">
         <padding>
             <Insets top="20.0" right="20.0" bottom="20.0" left="20.0"/>

@@ -2,38 +2,38 @@ package com.mycompany.restaurante.Model.Enum;
 
 public enum Ingredientes
 {
-    ÁLCOOL(1),
-    BALUT(2),
-    CAFÉ(3),
-    CÉREBRO(4),
-    CINZA(5),
-    DENTE(6),
-    ESPONJA(7),
-    FARINHA(8),
-    FOLHA_SECA(9),
-    FRUTA_PODRE(10),
-    GELO(11),
-    LEITE(12),
-    OLHO(13),
-    OVÁRIO(14),
-    PÃO(15),
-    POLVO(16),
-    QUEIJO_MOFADO(17),
-    RATO(18),
-    SANGUE(19),
-    SAGUESSUGA(20),
-    SAPO_PEÇONHENTO(21),
-    TESTÍCULO(22),
-    VIDRO(23);
-
-    private int ingrediente;
+    I1("ÁLCOOL"),
+    I2("BALUT"),
+    I3("CAFÉ"),
+    I4("CÉREBRO"),
+    I5("CINZA"),
+    I6("DENTE"),
+    I7("ESPONJA"),
+    I8("FARINHA"),
+    I9("FOLHA_SECA"),
+    I10("FRUTA_PODRE"),
+    I11("GELO"),
+    I12("LEITE"),
+    I13("OLHO"),
+    I14("OVÁRIO"),
+    I15("PÃO"),
+    I16("POLVO"),
+    I17("QUEIJO_MOFADO"),
+    I18("RATO"),
+    I19("SANGUE"),
+    I20("SAGUESSUGA"),
+    I21("SAPO_PEÇONHENTO"),
+    I22("TESTÍCULO"),
+    I23("VIDRO");
     
-    private Ingredientes(int ingrediente)
+    private String ingrediente;
+    
+    private Ingredientes(String ingrediente)
     {
         this.ingrediente = ingrediente;
     }
            
-   private int getIngrediente()
+   public String getIngrediente()
    {
        return ingrediente;
    }

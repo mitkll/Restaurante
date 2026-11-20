@@ -7,6 +7,7 @@ package com.mycompany.restaurante.Controller;
 import com.mycompany.restaurante.App;
 import com.mycompany.restaurante.DAO.Controller.SaveC;
 import com.mycompany.restaurante.DAO.SaveDAO;
+import com.mycompany.restaurante.Model.Enum.Upgrade;
 import com.mycompany.restaurante.Model.Save;
 import com.mycompany.restaurante.Model.Saves;
 import java.io.IOException;
@@ -145,8 +146,8 @@ public class SaveController {
         if(result.isPresent() && result.get() == ButtonType.OK){
             String nm = n.getText();
             if(!nm.isEmpty()){
-                sc.inserir(id, nm, 1, 50.0, new ArrayList<>());
-                carregar(new Save(id, nm, 1, 50.0, new ArrayList<>()));
+                sc.inserir(id, nm, 1, 50.0, Upgrade.L1);
+                carregar(new Save(id, nm, 1, 50.0, Upgrade.L1));
             }else{
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.setTitle("");

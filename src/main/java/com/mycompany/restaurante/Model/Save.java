@@ -4,6 +4,7 @@
  */
 package com.mycompany.restaurante.Model;
 
+import com.mycompany.restaurante.Model.Enum.Upgrade;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,27 +16,21 @@ public class Save {
     private String nome;
     private int id, dia;
     private double dinheiro;
-    private List<String> upgrades = new ArrayList<>();
+    private Upgrade upgrade;
 
-    public Save(int id, String nome, int dia, double dinheiro, ArrayList upgrades) {
+    public Save(int id, String nome, int dia, double dinheiro, Upgrade upgrades) {
         this.id = id;
         this.nome = nome;
         this.dia = dia;
         this.dinheiro = dinheiro;
-        this.upgrades = upgrades;
+        this.upgrade = upgrades;
     }
     
-    public Save(String nome, int dia, double dinheiro, ArrayList upgrades) {
+    public Save(String nome, int dia, double dinheiro, Upgrade upgrades) {
         this.nome = nome;
         this.dia = dia;
         this.dinheiro = dinheiro;
-        this.upgrades = upgrades;
-    }
-    
-    public Save(String nome, int dia, double dinheiro){
-        this.nome = nome;
-        this.dia = dia;
-        this.dinheiro = dinheiro;
+        this.upgrade = upgrades;
     }
 
     public Save() {
@@ -74,12 +69,12 @@ public class Save {
         this.dinheiro = dinheiro;
     }
     
-    public List<String> getUpgrades() {
-        return upgrades;
+    public Upgrade getUpgrades() {
+        return upgrade;
     }
 
-    public void setUpgrades(List<String> upgrades) {
-        this.upgrades = upgrades;
+    public void setUpgrades(Upgrade upgrades) {
+        this.upgrade = upgrades;
     }
 
     @Override

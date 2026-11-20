@@ -2,10 +2,10 @@ package com.mycompany.restaurante.Model.Enum;
 
 public enum Upgrade 
 {
-    LICENÇA_1(1),
-    LICENÇA_2(2),
-    LICENÇA_3(3),
-    LICENÇA_4(4);
+    L1(1),
+    L2(2),
+    L3(3),
+    L4(4);
     
     private int licença;
     
@@ -14,7 +14,7 @@ public enum Upgrade
         this.licença = licença;
     }
            
-   private int getLicença()
+   public int getLicença()
    {
        return licença;
    }

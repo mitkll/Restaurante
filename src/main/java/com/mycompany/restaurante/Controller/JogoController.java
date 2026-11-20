@@ -8,6 +8,7 @@ import com.mycompany.restaurante.App;
 import com.mycompany.restaurante.DAO.Controller.SaveC;
 import com.mycompany.restaurante.Model.Cliente;
 import com.mycompany.restaurante.Model.Clientes;
+import com.mycompany.restaurante.Model.Enum.Receitas;
 import com.mycompany.restaurante.Model.Save;
 import com.mycompany.restaurante.Model.Saves;
 import java.io.IOException;
@@ -15,6 +16,7 @@ import java.sql.SQLException;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 import java.util.Random;
 import javafx.animation.KeyFrame;
@@ -32,7 +34,7 @@ import javafx.util.Duration;
  * @author jonat
  */
 public class JogoController {
-    @FXML private Label h, d;
+    @FXML private Label h, d, p1, p2, p3, t1, t2, t3;
     @FXML private VBox jogo;
     @FXML private ImageView monstro1, monstro2, monstro3;
     
@@ -42,7 +44,7 @@ public class JogoController {
     //private final Cliente cliente = Clientes.getCliente();
     
     private LocalTime hora;
-    private int dia, posicao;
+    private int dia;
     private Timeline relogio, idC, tempo;
     private Random id = new Random();
     
@@ -83,7 +85,7 @@ public class JogoController {
                 } catch (IOException ex) {
                     System.out.println(ex);
                 }
-            }else if(e.getCode() == KeyCode.ESCAPE){
+            }else if(e.getCode() == KeyCode.S){
                 try {
                     sair();
                 } catch (IOException ex) {
@@ -99,6 +101,13 @@ public class JogoController {
         monstro1.setImage(null);
         monstro2.setImage(null);
         monstro3.setImage(null);
+        p1.setText("");
+        p2.setText("");
+        p3.setText("");
+        t1.setText("");
+        t2.setText("");
+        t3.setText("");
+        clienteImg();
     }
     
     @FXML
@@ -128,46 +137,95 @@ public class JogoController {
     }
     
     private void cliente(){
-        tempo = new Timeline();
         idC = new Timeline();
 
         idC.getKeyFrames().add(
             new KeyFrame(Duration.seconds(10), e -> {
-                if (Clientes.cliente.size() >= 3) {
-                    Tempo();
-                } 
-                else {
-                    Cliente novo = new Cliente(id.nextInt(8), 5, 0, false, new ArrayList<>());
+                if (Clientes.cliente.size() < 3) {
+                    Cliente novo = new Cliente(id.nextInt(8), 6, 0, false, pedido());
                     Clientes.cliente.add(novo);
                     clienteImg();
-                    Tempo();
                 }
             })
         );
 
         idC.setCycleCount(Timeline.INDEFINITE);
         idC.play();
-
+        
+        tempo = new Timeline(
+        new KeyFrame(Duration.seconds(10), e -> {
+                Tempo();
+            })
+        );
+        
         tempo.setCycleCount(Timeline.INDEFINITE);
         tempo.play();
     }
 
+    private ArrayList<Receitas> pedido(){
+        ArrayList<Receitas> pedido = new ArrayList<>();
+        Random random = new Random();
+        String receita;
+        if(save.getDia() >=5){
+            int r = random.nextInt(3);
+            for(int i = 0; i <= r; i++){
+                switch(save.getUpgrades()){
+                    case L1:
+                        receita = "R"+(id.nextInt(3)+1);
+                        pedido.add(Receitas.valueOf(receita));
+                        break;
+                    case L2:
+                        receita = "R"+(id.nextInt(6)+1);
+                        pedido.add(Receitas.valueOf(receita));
+                        break;
+                    case L3:
+                        receita = "R"+(id.nextInt(9)+1);
+                        pedido.add(Receitas.valueOf(receita));
+                        break;
+                    case L4:
+                        receita = "R"+(id.nextInt(12)+1);
+                        pedido.add(Receitas.valueOf(receita));
+                        break;
+                }
+            }
+            return pedido;
+        }else if(save.getDia() >= 2){
+            int r = random.nextInt(2);
+            for(int i = 0; i <= r; i++){
+                receita = "R"+(id.nextInt(3)+1);
+                pedido.add(Receitas.valueOf(receita));
+            }
+            return pedido;
+        }else{
+            for(int i = 0; i < 1; i++){
+                receita = "R"+(id.nextInt(3)+1);
+                pedido.add(Receitas.valueOf(receita));
+            }
+            return pedido;
+        }
+    }
+    
     private void Tempo() {
-        if (tempo.getKeyFrames().isEmpty()) {
-            tempo.getKeyFrames().add(
-                new KeyFrame(Duration.seconds(10), ex -> {
-                    for (int i = Clientes.cliente.size() - 1; i >= 0; i--) {
-                        Cliente c = Clientes.cliente.get(i);
+        for (int i = 0; i < Clientes.cliente.size(); i++) {
+            Cliente c = Clientes.cliente.get(i);
 
-                        if (c.getTempo() > 0 && !c.isAtendido()) {
-                            c.setTempo(c.getTempo() - 1);
-                        } else {
-                            imgC(i);
-                            Clientes.cliente.remove(i);
-                        }
-                    }
-                })
-            );
+            if (c.getTempo() > 0 && !c.isAtendido()) {
+                c.setTempo(c.getTempo() - 1);
+                switch (i) {
+                    case 0:
+                        t1.setText(String.valueOf(c.getTempo()));
+                        break;
+                    case 1:
+                        t2.setText(String.valueOf(c.getTempo()));
+                        break;
+                    case 2:
+                        t3.setText(String.valueOf(c.getTempo()));
+                        break;
+                }
+            } else {
+                imgC(i);
+                Clientes.cliente.remove(i);
+            }
         }
     }
     
@@ -175,10 +233,19 @@ public class JogoController {
         switch(i){
             case 0:
                  monstro1.setImage(null);
+                 p1.setText("");
+                 t1.setText("");
+                 break;
             case 1:
                 monstro2.setImage(null);
+                p2.setText("");
+                t2.setText("");
+                break;
             case 2:
                 monstro3.setImage(null);
+                p3.setText("");
+                t3.setText("");
+                break;
         }
     }
     
@@ -189,6 +256,12 @@ public class JogoController {
         monstro1.setImage(null);
         monstro2.setImage(null);
         monstro3.setImage(null);
+        p1.setText("");
+        p2.setText("");
+        p3.setText("");
+        t1.setText("");
+        t2.setText("");
+        t3.setText("");
         Clientes.cliente.clear();
         App.setRoot("final");
     }
@@ -198,6 +271,12 @@ public class JogoController {
         monstro1.setImage(null);
         monstro2.setImage(null);
         monstro3.setImage(null);
+        p1.setText("");
+        p2.setText("");
+        p3.setText("");
+        t1.setText("");
+        t2.setText("");
+        t3.setText("");
 
         for (int i = 0; i < Clientes.cliente.size(); i++) {
             Cliente c = Clientes.cliente.get(i);
@@ -208,12 +287,25 @@ public class JogoController {
             switch (i) {
                 case 0:
                     monstro1.setImage(img);
+                    t1.setText(String.valueOf(c.getTempo()));
+                    for (Receitas pedido : c.getPedido()) {
+                        p1.setText(pedido.getReceita()+" ");
+                    }
                     break;
+
                 case 1:
                     monstro2.setImage(img);
+                    t2.setText(String.valueOf(c.getTempo()));
+                    for (Receitas pedido : c.getPedido()) {
+                        p2.setText(pedido.getReceita()+" ");
+                    }
                     break;
                 case 2:
                     monstro3.setImage(img);
+                    t3.setText(String.valueOf(c.getTempo()));
+                    for (Receitas pedido : c.getPedido()) {
+                        p3.setText(pedido.getReceita()+" ");
+                    }
                     break;
             }
         }

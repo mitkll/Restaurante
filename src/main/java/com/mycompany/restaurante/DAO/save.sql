@@ -3,5 +3,5 @@ CREATE TABLE save (
     nome character varying(100) NOT NULL,
     dia integer NOT NULL,
     dinheiro double precision NOT NULL,
-    upgrades character varying(100)[]
+    upgrades character varying(100)
 );

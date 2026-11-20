@@ -5,6 +5,7 @@
 package com.mycompany.restaurante.DAO;
 
 import com.mycompany.restaurante.DAO.utils.Conexao;
+import com.mycompany.restaurante.Model.Enum.Upgrade;
 import com.mycompany.restaurante.Model.Save;
 import java.sql.Array;
 import java.sql.Connection;
@@ -32,11 +33,7 @@ public class SaveDAO {
         stmt.setString(2, s.getNome());
         stmt.setInt(3, s.getDia());
         stmt.setDouble(4, s.getDinheiro());
-
-        String[] upgradesArray = s.getUpgrades().toArray(new String[0]);
-        Array up = connection.createArrayOf("text", upgradesArray);
-
-        stmt.setArray(5, up);
+        stmt.setString(5, s.getUpgrades().name());
         stmt.executeUpdate();
     }
     
@@ -50,21 +47,13 @@ public class SaveDAO {
         stmt.setInt(1, id);
         
         ResultSet rs = stmt.executeQuery();
-        while(rs.next()){
-            Array sqlArray = rs.getArray("upgrades");
-            ArrayList<String> upgrades = new ArrayList<>();
-
-            if (sqlArray != null) {
-                String[] array = (String[]) sqlArray.getArray();
-                upgrades = new ArrayList<>(Arrays.asList(array));
-            }
-            
+        while(rs.next()){            
             Save s = new Save(
                     rs.getInt("id"),
                     rs.getString("nome"),
                     rs.getInt("dia"),
                     rs.getDouble("dinheiro"),
-                    upgrades
+                    Upgrade.valueOf(rs.getString("upgrades"))
             );
             lista.add(s);
         }
@@ -87,15 +76,7 @@ public class SaveDAO {
             s.setNome(rs.getString("nome"));
             s.setDia(rs.getInt("dia"));
             s.setDinheiro(rs.getDouble("dinheiro"));
-            Array sqlArray = rs.getArray("upgrades");
-
-            if (sqlArray != null) {
-                String[] upgradesArray = (String[]) sqlArray.getArray();
-                List<String> listaUpgrades = new ArrayList<>(Arrays.asList(upgradesArray));
-                s.setUpgrades(listaUpgrades);
-            } else {
-                s.setUpgrades(new ArrayList<>()); 
-            }
+            s.setUpgrades(Upgrade.valueOf(rs.getString("upgrades")));
 
             sLista.add(s);
         }
@@ -112,11 +93,7 @@ public class SaveDAO {
 
             stmt.setInt(1, s.getDia());
             stmt.setDouble(2, s.getDinheiro());
-            
-            String[] upgradesArray = s.getUpgrades().toArray(new String[0]);
-            Array up = connection.createArrayOf("text", upgradesArray);
-            
-            stmt.setArray(3, up);
+            stmt.setString(3, s.getUpgrades().name());
             stmt.setInt(4, s.getId());
 
             int linhas = stmt.executeUpdate();

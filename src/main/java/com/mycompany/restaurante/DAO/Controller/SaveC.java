@@ -1,6 +1,7 @@
 package com.mycompany.restaurante.DAO.Controller;
 
 import com.mycompany.restaurante.DAO.SaveDAO;
+import com.mycompany.restaurante.Model.Enum.Upgrade;
 import com.mycompany.restaurante.Model.Save;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -9,7 +10,7 @@ import java.util.List;
 public class SaveC {
     SaveDAO dao = new SaveDAO();
     
-    public Save inserir(int id, String n, int d, double dd, ArrayList u) throws SQLException{
+    public Save inserir(int id, String n, int d, double dd, Upgrade u) throws SQLException{
         Save s = new Save(id,n,d,dd,u);
         dao.add(s);
         return s;
