@@ -12,17 +12,14 @@ import com.mycompany.restaurante.Model.Enum.Receitas;
 import com.mycompany.restaurante.Model.Save;
 import com.mycompany.restaurante.Model.Saves;
 import java.io.IOException;
-import java.sql.SQLException;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Optional;
 import java.util.Random;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.fxml.FXML;
-import javafx.geometry.Pos;
 import javafx.scene.control.*;
 import javafx.scene.image.*;
 import javafx.scene.input.KeyCode;
@@ -35,7 +32,7 @@ import javafx.util.Duration;
  */
 public class JogoController {
     @FXML private Label h, d, p1, p2, p3, t1, t2, t3;
-    @FXML private VBox jogo;
+    @FXML private StackPane j;
     @FXML private ImageView monstro1, monstro2, monstro3;
     
     SaveC sc = new SaveC();
@@ -78,14 +75,14 @@ public class JogoController {
     
     @FXML
     private void initialize() throws InterruptedException{
-        jogo.setOnKeyPressed(e ->{
+        j.setOnKeyPressed(e ->{
             if(e.getCode() == KeyCode.I){
                 try {
                     loja();
                 } catch (IOException ex) {
                     System.out.println(ex);
                 }
-            }else if(e.getCode() == KeyCode.S){
+            }else if(e.getCode() == KeyCode.ESCAPE){
                 try {
                     sair();
                 } catch (IOException ex) {
@@ -141,10 +138,18 @@ public class JogoController {
 
         idC.getKeyFrames().add(
             new KeyFrame(Duration.seconds(10), e -> {
-                if (Clientes.cliente.size() < 3) {
+                if(Clientes.cliente.isEmpty() || Clientes.cliente.size() < 3){
                     Cliente novo = new Cliente(id.nextInt(8), 6, 0, false, pedido());
                     Clientes.cliente.add(novo);
                     clienteImg();
+                }else{
+                    for(int i = 0; i < Clientes.cliente.size(); i++){
+                        if(Clientes.cliente.get(i) == null){
+                            Cliente novo = new Cliente(id.nextInt(8), 4, 0, false, pedido());
+                            Clientes.cliente.set(i, novo);
+                            clienteImg();
+                        }
+                    }
                 }
             })
         );
@@ -209,7 +214,7 @@ public class JogoController {
         for (int i = 0; i < Clientes.cliente.size(); i++) {
             Cliente c = Clientes.cliente.get(i);
 
-            if (c.getTempo() > 0 && !c.isAtendido()) {
+            if (c.getTempo() > 1 && !c.isAtendido()) {
                 c.setTempo(c.getTempo() - 1);
                 switch (i) {
                     case 0:
@@ -224,7 +229,7 @@ public class JogoController {
                 }
             } else {
                 imgC(i);
-                Clientes.cliente.remove(i);
+                Clientes.cliente.set(i, null);
             }
         }
     }

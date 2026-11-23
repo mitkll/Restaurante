@@ -10,11 +10,8 @@
            xmlns="http://javafx.com/javafx/8.0.171"
            xmlns:fx="http://javafx.com/fxml/1"
            fx:id="j"
+           stylesheets="@style.css"
            fx:controller="com.mycompany.restaurante.Controller.JogoController">
-
-    <stylesheets>
-        <URL value="@style.css"/>
-    </stylesheets>
 
     <VBox alignment="CENTER_LEFT" StackPane.alignment="CENTER_LEFT">
         <Label fx:id="p1" text=""/>

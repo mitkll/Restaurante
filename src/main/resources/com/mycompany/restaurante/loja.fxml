@@ -6,12 +6,17 @@
 <?import java.net.URL?>
 <?import javafx.geometry.Insets?>
 
-<VBox alignment="TOP_RIGHT" spacing="20.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.restaurante.Controller.LojaController">
-    <stylesheets>
-        <URL value="@style.css" />
-    </stylesheets>
+<VBox alignment="TOP_RIGHT" spacing="20.0"
+      xmlns="http://javafx.com/javafx/8.0.171" 
+      xmlns:fx="http://javafx.com/fxml/1" 
+      stylesheets="@style.css"
+      fx:id="loja"
+      fx:controller="com.mycompany.restaurante.Controller.LojaController">
     <children>
        <Label fx:id="dd" text="a" />
+       <HBox>
+           <Button fx:id="licenca" styleClass="basic" text="Licenca 2" onAction="#licenca"/>
+       </HBox>
        <Region VBox.vgrow="ALWAYS" />
        <Button styleClass="basic" text="Voltar" onAction="#voltar" alignment="BASELINE_RIGHT"/>
    </children>
