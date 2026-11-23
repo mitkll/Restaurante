@@ -57,6 +57,17 @@ public class JogoController {
     }
     
     @FXML
+    private void cardapio() throws IOException {
+        relogio.stop();
+        idC.stop();
+        tempo.stop();
+        horaS = hora;
+        save.setDia(dia);
+        
+        App.setRoot("cardapio");
+    }
+    
+    @FXML
     private void sair() throws IOException{
         Alert det = new Alert(Alert.AlertType.CONFIRMATION);
         det.setTitle("Você terá que recomeçar o dia");
@@ -85,6 +96,12 @@ public class JogoController {
             }else if(e.getCode() == KeyCode.ESCAPE){
                 try {
                     sair();
+                } catch (IOException ex) {
+                    System.out.println(ex);
+                }
+            }else if(e.getCode() == KeyCode.J){
+                try {
+                    cardapio();
                 } catch (IOException ex) {
                     System.out.println(ex);
                 }
